@@ -1,11 +1,15 @@
 <script setup>
 const { find } = useStrapi();
 
-const response = await find("posts");
+const { data, pending, refresh, error } = await useAsyncData("posts", () =>
+  find("posts")
+);
 </script>
 <template>
   <div>
     <NuxtWelcome />
-    {{ response }}
+    <pre>{{ data }}</pre>
+    <pre>{{ pending }}</pre>
+    <pre>{{ error }}</pre>
   </div>
 </template>
